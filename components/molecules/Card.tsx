@@ -1,41 +1,37 @@
 import Image from 'next/image';
 import React from 'react';
-import { CiClock2 } from 'react-icons/ci';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 import { MdFoodBank } from 'react-icons/md';
 import { GiChefToque } from 'react-icons/gi';
+import { dataRecipes } from '@/utils/types/RecipeTypes';
 
 type TPropsCard = {
-  number: number;
+  data: dataRecipes;
 };
 
-const Card = ({}: TPropsCard) => {
+const Card = ({ data }: TPropsCard) => {
   return (
-    <div className="flex flex-col border-2">
+    <div className="flex flex-col border-2 border-gray-500">
       <div className="h-full w-full relative">
-        <Image
-          src="https://www.masakapahariini.com/wp-content/uploads/2018/04/Bango-Kecap-Manis-100x100.jpg"
-          alt="its image"
-          width={500}
-          height={500}
-        />
+        <Image src={data.thumb} alt={data.key} width={500} height={500} />
       </div>
       <div className="p-2">
         <ul className="md:flex flex-row justify-around">
           <li className="flex gap-1 items-center">
-            <CiClock2 size={20} color="red" />
-            <div>1 jam</div>
+            <AiOutlineClockCircle size={20} color="red" />
+            <div>{data.times}</div>
           </li>
           <li className="flex gap-1 items-center">
             <MdFoodBank size={20} color="red" />
-            <div>4 Porsi</div>
+            <div>{data.serving}</div>
           </li>
           <li className="flex gap-1 items-center">
             <GiChefToque size={20} color="red" />
-            <div>Sulit</div>
+            <div>{data.difficulty}</div>
           </li>
         </ul>
         <hr className="border-orange-500 my-2" />
-        <div>Lorem ipsum, dolor sit amet consectetur adipisicing.</div>
+        <div>{data.title}</div>
       </div>
     </div>
   );
