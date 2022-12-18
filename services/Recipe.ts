@@ -1,6 +1,7 @@
 import {
   paramGetRecipeBySearch,
   paramsGetAllRecipeByPage,
+  paramsGetDetailRecipe,
 } from '@/utils/types/RecipeTypes';
 import ApiService from './Api';
 
@@ -50,6 +51,20 @@ const RecipeService = {
     const requestData = {
       method: 'get',
       url: `/api/search/?q=${query}`,
+    };
+
+    try {
+      const response = await ApiService.customRequest(requestData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getDetailRecipe: async ({ key }: paramsGetDetailRecipe) => {
+    const requestData = {
+      method: 'get',
+      url: `/api/recipe/${key || ''}`,
     };
 
     try {

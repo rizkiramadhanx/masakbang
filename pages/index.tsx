@@ -1,5 +1,5 @@
 import Category from '@/components/molecules/Category';
-import { useGetAllCategoryRecipe } from '@/hooks/Recipes/usegetAllCategoryRecipe';
+import { useGetAllCategoryRecipe } from '@/hooks/Recipes/useGetAllCategoryRecipe';
 import { useGetAllRecipeByPage } from '@/hooks/Recipes/useGetAllRecipeByPage';
 import { useGetRecipeBySearch } from '@/hooks/Recipes/useGetRecipeBySearch';
 import { Card, Footer, Navbar, SearchBox, SkeletonCard } from '@/Molecules';

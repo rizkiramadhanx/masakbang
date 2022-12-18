@@ -1,4 +1,4 @@
-import { ResponseApiCommon } from './CommonType';
+import { ResponseApiCommon, ResponseApiCommonSingle } from './CommonType';
 
 export type paramsGetAllRecipeByPage = {
   page: number;
@@ -7,6 +7,27 @@ export type paramsGetAllRecipeByPage = {
 export type paramGetRecipeBySearch = {
   query?: string | null;
 };
+
+export type paramsGetDetailRecipe = {
+  key: string;
+};
+
+export type detailRecipe = {
+  title: string;
+  thumb: string;
+  serving: string;
+  times: string;
+  difficulty: string;
+  author: {
+    user: string;
+    datePublished: string;
+  };
+  desc: string;
+  ingredient: Array<string>;
+  step: Array<string>;
+};
+
+export type responseDetailRecipe = ResponseApiCommonSingle<detailRecipe>;
 
 export type dataRecipes = {
   title: string;
