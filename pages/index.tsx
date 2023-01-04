@@ -3,17 +3,18 @@ import { useGetAllCategoryRecipe } from '@/hooks/Recipes/useGetAllCategoryRecipe
 import { useGetAllRecipeByPage } from '@/hooks/Recipes/useGetAllRecipeByPage';
 import { useGetRecipeBySearch } from '@/hooks/Recipes/useGetRecipeBySearch';
 import { Card, Footer, Navbar, SearchBox, SkeletonCard } from '@/Molecules';
-import { FC, useMemo } from 'react';
+import { NextPage } from 'next';
+import { useMemo } from 'react';
 import { useState } from 'react';
 
-const Home: FC = () => {
+const Home: NextPage = () => {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string | null>(null);
-  const { data, isFetched } = useGetAllRecipeByPage({
+  const { data, isFetched, isLoading } = useGetAllRecipeByPage({
     page: page,
   });
 
-  const { data: dataCategory, isLoading } = useGetAllCategoryRecipe();
+  const { data: dataCategory } = useGetAllCategoryRecipe();
 
   const listRecipeCategory = useMemo(() => {
     const datalist = dataCategory?.results.map((e) => {
@@ -35,7 +36,6 @@ const Home: FC = () => {
     setSearch(e.target.value);
   };
 
-  console.log(dataSearchRecipes);
   return (
     <div>
       <Navbar />

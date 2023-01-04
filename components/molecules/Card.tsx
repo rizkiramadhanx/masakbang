@@ -4,6 +4,7 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { MdFoodBank } from 'react-icons/md';
 import { GiChefToque } from 'react-icons/gi';
 import { dataRecipes } from '@/utils/types/RecipeTypes';
+import Link from 'next/link';
 
 type TPropsCard = {
   data: dataRecipes;
@@ -11,7 +12,10 @@ type TPropsCard = {
 
 const Card = ({ data }: TPropsCard) => {
   return (
-    <div className="flex flex-col border-2 border-gray-500">
+    <Link
+      href={`/resep/${data.key}`}
+      className="flex flex-col border-2 border-gray-500"
+    >
       <div className="h-full w-full relative">
         <Image src={data.thumb} alt={data.key} width={500} height={500} />
       </div>
@@ -33,7 +37,7 @@ const Card = ({ data }: TPropsCard) => {
         <hr className="border-orange-500 my-2" />
         <div>{data.title}</div>
       </div>
-    </div>
+    </Link>
   );
 };
 
