@@ -1,12 +1,21 @@
-import ApiService from '@/services/Api';
+import { GlobalContext } from '@/store/GlobalState';
 import { useRouter } from 'next/router';
-import { useState, useEffect, ReactNode } from 'react';
+import { ReactNode, useContext, useEffect } from 'react';
 
 const ProtectedRoutes = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const [isLoggedIn, setisLoggedIn] = useState<boolean>(true);
 
-  return <>{isLoggedIn ? children : <>askssj</>}</>;
+  const { state } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      if (state.isLogin === false) {
+        router.replace('/login');
+      }
+    }
+  }, [router]);
+
+  return <>{state.isLogin ? children : undefined}</>;
 };
 
 export default ProtectedRoutes;

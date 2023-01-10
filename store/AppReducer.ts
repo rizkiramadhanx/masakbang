@@ -7,6 +7,8 @@ export default (state: TinitialValue, action: Taction) => {
       return { ...state, username: action.payload };
     case 'INIT_STORE':
       return action.payload;
+    case 'LOGIN':
+      return { ...state, isLogin: true };
     default:
       return state;
   }

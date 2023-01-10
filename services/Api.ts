@@ -18,7 +18,6 @@ const ApiService = {
         return res;
       },
       async (err) => {
-        console.log('ja');
         console.log(err);
       }
     );

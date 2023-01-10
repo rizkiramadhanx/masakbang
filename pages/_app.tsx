@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const [queryClient] = useState(() => new QueryClient());
 
-  const publicRouter = ['/'];
+  const publicRouter = ['/login'];
 
   return (
     <GlobalProvider>

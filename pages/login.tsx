@@ -1,7 +1,7 @@
 import { Input } from '@/components/atoms';
 import { useLogin } from '@/hooks/Auth/useLogin';
 import { GlobalContext } from '@/store/GlobalState';
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 
 type Tlogin = {
   email: string;
@@ -17,18 +17,18 @@ const Login = () => {
 
   const { state } = useContext(GlobalContext);
 
-  const { mutate, data } = useLogin();
+  const { mutate } = useLogin();
+
+  const { dispatch } = useContext(GlobalContext);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(formData, {
       onSuccess: () => {
-        // console.log(data);
+        dispatch({ type: 'LOGIN' });
       },
     });
   };
-
-  const { dispatch } = useContext(GlobalContext);
 
   return (
     <div className="container">

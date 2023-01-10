@@ -1,8 +1,11 @@
-import { useLocalStorage } from '@/utils/helpers/useLocalStorage';
 import React, { createContext, useReducer, Dispatch, useEffect } from 'react';
 import AppReducer from './AppReducer';
 
-const initialValue: TinitialValue = { theme: true, username: 'oji' };
+const initialValue: TinitialValue = {
+  theme: true,
+  username: 'oji',
+  isLogin: false,
+};
 
 export const GlobalContext = createContext<{
   state: TinitialValue;

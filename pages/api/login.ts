@@ -1,10 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type Data = {
-  email: string;
-  password: string;
-};
-
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { email, password } = req.body;
 
