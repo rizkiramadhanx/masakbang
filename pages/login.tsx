@@ -1,6 +1,7 @@
 import { Input } from '@/components/atoms';
 import { useLogin } from '@/hooks/Auth/useLogin';
-import React, { useState } from 'react';
+import { GlobalContext } from '@/store/GlobalState';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 
 type Tlogin = {
   email: string;
@@ -14,16 +15,20 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const { state } = useContext(GlobalContext);
+
   const { mutate, data } = useLogin();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(formData, {
       onSuccess: () => {
-        console.log(data);
+        // console.log(data);
       },
     });
   };
+
+  const { dispatch } = useContext(GlobalContext);
 
   return (
     <div className="container">
@@ -35,8 +40,10 @@ const Login = () => {
           <h1 className="text-center text-orange-500 text-2xl font-extrabold">
             Form Login
           </h1>
+          <p>{JSON.stringify(state)}</p>
           <Input name="email" labelText="Email" onChange={handleChange} />
           <Input name="password" labelText="Password" onChange={handleChange} />
+
           <button
             className="bg-orange-500 py-1 rounded-md text-white"
             type="submit"

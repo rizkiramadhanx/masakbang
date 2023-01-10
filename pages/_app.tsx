@@ -13,6 +13,7 @@ import configs from '@/configs';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 import ProtectedRoutes from '@/utils/helpers/ProtectedRoutes';
+import { GlobalProvider } from '@/store/GlobalState';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,19 +32,21 @@ export default function App({ Component, pageProps }: AppProps) {
   const publicRouter = ['/'];
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <main className={`${inter.variable} font-sans`}>
-          {publicRouter.includes(router.pathname) ? (
-            <Component {...pageProps} />
-          ) : (
-            <ProtectedRoutes>
+    <GlobalProvider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <main className={`${inter.variable} font-sans`}>
+            {publicRouter.includes(router.pathname) ? (
               <Component {...pageProps} />
-            </ProtectedRoutes>
-          )}
-        </main>
-        {env == 'development' ? <ReactQueryDevtools /> : null}
-      </Hydrate>
-    </QueryClientProvider>
+            ) : (
+              <ProtectedRoutes>
+                <Component {...pageProps} />
+              </ProtectedRoutes>
+            )}
+          </main>
+          {env == 'development' ? <ReactQueryDevtools /> : null}
+        </Hydrate>
+      </QueryClientProvider>
+    </GlobalProvider>
   );
 }
